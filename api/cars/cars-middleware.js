@@ -26,7 +26,7 @@ const checkCarPayload = (req, res, next) => {
     res.status(400).json({ message: "make is missing" });
   } else if (!req.body.model) {
     res.status(400).json({ message: "model is missing" });
-  } else if (!res.body.mileage) {
+  } else if (!req.body.mileage) {
     res.status(400).json({ message: "mileage is missing" });
   } else {
     next();
@@ -43,9 +43,9 @@ const checkVinNumberValid = (req, res, next) => {
 
 const checkVinNumberUnique = async (req, res, next) => {
   const { vin } = req.body;
-  const vinExists = await Car.getAll().where({ vin }).first();
+  const vinExists = await Car.getAll().where("vin", vin).first();
   if (vinExists) {
-    res.status(400).json({ message: `cin ${vin} already exists` });
+    res.status(400).json({ message: `vin ${req.body.vin} already exists` });
   } else {
     next();
   }
