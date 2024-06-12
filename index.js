@@ -1,5 +1,8 @@
-const server = require('./api/server')
+const server = require("./api/server"); // hooks up the server to index.js so it can run with either node or nodemon
 
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000; // uses PORT variable in .env or defaults to 4000
 
-server.listen(port, () => console.log(`\n** Running on port ${port} **\n`))
+server.listen(PORT, () => {
+  // tells server what port to run on
+  console.log(`\n== API running on port ${PORT} ==\n`);
+});
